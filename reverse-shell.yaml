@@ -5,7 +5,7 @@ properties:
     - resource: PSDscResources/Script
       id: ReverseShell
       directives:
-        description: Reverse Shell via WinGet
+        description: Reverse Shell Test
         allowPrerelease: true
       settings:
         GetScript: |
